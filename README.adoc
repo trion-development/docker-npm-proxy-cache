@@ -1,0 +1,18 @@
+= Caching proxy for NPM
+Especially useful in CI/CD setups to save bandwith and reduce build times.
+
+== Cache settings
+Set to 24h and will deliver possibly stale data in case the upstream registry is not reachable.
+
+== Kubernetes usage
+See the `k8s.yaml` example deployment to deploy as a service.
+
+Users of minikube might want to use a NodePort deployment.
+
+Be careful when using the docker daemon of your cluster (minikube) directly for build containers:
+Since the container will not be managed by kubernetes, the kubernetes DNS and service discovery won't work.
+
+You must use the IP of your minikube node instead.
+
+== Building the image
+As usual run a `docker build -t trion/npm-proxy-cache`.
